@@ -214,7 +214,7 @@ Hazelcast is embedded in this application. The configuration is programmatically
 
 ### Key Annotations:
 - **@Enable Caching:** Spring Boot autoconfigures the cache infrastructure 
-- **@Cacheable:** to cache response from method
+- **@Cacheable:** Caches response from method. Cached items respond immediately without the method executing observable via log message("fetching from db!") not logging.
 - **@CacheEvict(value = "orders-cache", key = "#id"):** evict cached value with key = id
 - **@CachePut(value = "orders-cache", key = "#id"):** update cached value with key = id
 ---
@@ -234,8 +234,8 @@ RabbitMQ is used for sending and receiving messages asynchronously.
 
 ### Configuring Listeners and Producers
 
-- **Message Producer:** Sends messages to a queue.
-- **Message Listener:** Consumes messages from the queue.
+- **Message Producer:** Sends messages to a queue. Payment service produces payment object and pushes to queue 
+- **Message Listener:** Consumes messages from the queue. Transaction service acts as listener and consumes payment object then creates entry in transaction table
 
 ### Example Configuration
 
