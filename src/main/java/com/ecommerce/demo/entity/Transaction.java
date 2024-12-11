@@ -27,6 +27,7 @@ public class Transaction {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(nullable = false)
     private BigDecimal amount;
 
     @CreationTimestamp

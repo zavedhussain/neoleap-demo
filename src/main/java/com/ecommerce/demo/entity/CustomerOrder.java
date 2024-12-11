@@ -29,6 +29,7 @@ public class CustomerOrder {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderProduct> orderProducts;
 
+    @Column(nullable = false)
     private BigDecimal orderAmount;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)

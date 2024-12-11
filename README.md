@@ -8,8 +8,9 @@ This is an e-commerce application that allows users to create orders for product
 1. **Product:** Products are ordered by users
 2. **User:** User orders products and make payments for orders
 3. **CustomerOrder:** A list of order items by a user with products,product quantity and order amount
-4. **Payment:** A payment made by a user against a order that may fail or succeed.
-5. **Transaction:** A transaction message is generated on successful payment and stored in transaction table.
+4. **OrderProduct:** A join table for order, product and quantity.
+5. **Payment:** A payment made by a user against a order that may fail or succeed.
+6. **Transaction:** A transaction message is generated on successful payment and stored in transaction table.
 
 
 ### Features
@@ -18,6 +19,13 @@ This is an e-commerce application that allows users to create orders for product
 2. **RabbitMQ Integration:** Enables asynchronous message processing.
 3. **Order Management:** Includes creating, retrieving, and managing orders.
 4. **Product and User Management:** Provides APIs to manage products and users.
+5. **Payments:** Provides API for receiving payments and sends valid payments via rabbitmq messages
+6. **SwaggerUI:** Swagger UI integrated for APIs
+7. **Docker:** Docker file for generating docker images
+8. **Unit Tests:** Unit tests written with jUnit and Mockito for Payment Service
+9. **Exception Handling:** Global exception handling using Aspect.
+10. **Migration Scripts:** Sql scripts for entities
+11. **Data Validation:** Validation using annotations like @Positive,@NotNull
 
 ---
 
@@ -67,11 +75,6 @@ Ensure RabbitMQ is installed and running.Installation instructions below. You ca
 rabbitmq-server
 ```
 
-For Docker:
-
-```bash
-docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
-```
 
 Access the RabbitMQ management console at `http://localhost:15672` (default credentials: guest/guest).
 
@@ -85,9 +88,22 @@ mvn spring-boot:run
 
 ### Step 6: Access the APIs
 
-The application will start on `http://localhost:8000`. Use tools like Postman to test the APIs.
+The application will start on `http://localhost:8000`. Use tools like Postman to test the APIs or via [SwaggerUI](http://localhost:8000/swagger-ui/index.html).
 
 ---
+
+### Docker:
+
+Build Docker image
+
+```bash
+docker build -t ecommerce-demo .
+```
+
+Run docker image
+```bash
+docker run -p 8000:8000 ecommerce-demo
+```
 
 ## Usage
 
