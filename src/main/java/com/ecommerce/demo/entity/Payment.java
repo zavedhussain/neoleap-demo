@@ -14,16 +14,26 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductOrder {
+public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String customerName;
-    private String product;
-    private int quantity;
-    private BigDecimal price;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private CustomerOrder order;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    private BigDecimal receivedAmount;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
+
+    private String errorMessage;
 
     @CreationTimestamp
     private LocalDateTime createdOn;

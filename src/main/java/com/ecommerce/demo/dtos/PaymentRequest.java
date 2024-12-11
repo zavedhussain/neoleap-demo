@@ -1,25 +1,24 @@
 package com.ecommerce.demo.dtos;
 
-import com.ecommerce.demo.entity.CustomerOrder;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderRequest {
+public class PaymentRequest {
+
+    @NotNull
+    private Long orderId;
 
     @NotBlank
     private Long userId;
 
-    private List<ProductQuantity> products;
-
+    @Positive
+    private BigDecimal amount;
 }
